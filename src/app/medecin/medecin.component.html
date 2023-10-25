@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr> <th>Id</th><th>Nom</th> <th>specialité</th> <th>Date naissance</th><th>faculté</th> </tr>
+                </thead>
+                <tbody *ngFor="let medecin of medecin">
+                    <tr >
+                        <td>{{medecin.idmedecin}}</td>
+                        <td>{{medecin.nommedecin}}</td>
+                        <td>{{medecin.specialite}}</td>
+                        <td>{{medecin.datenaissance | date:'dd/MM/yyyy'}}</td>
+                        <td>{{medecin.faculte}}</td>
+                        <td><a class="btn btn-danger" (click)="supprimermedecin(medecin)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updatemedecin',medecin.idmedecin]">Modifier</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

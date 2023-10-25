@@ -1,0 +1,33 @@
+<div class="container">
+    <div>
+        <h2>Ajouter un medecin:</h2>
+    </div>
+    <form >
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label >ID medecin</label>
+                <input type="text" [(ngModel)]="newmedecin.idmedecin" name="idmedecin" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" >
+            <label >Nom medecin</label>
+                <input type="text"[(ngModel)]= "newmedecin.nommedecin"name="nommedecin" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label >specialité</label>
+                <input type="string" [(ngModel)]= "newmedecin.specialite" name="specialite" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label >Date naissance</label>
+                <input type="date" [(ngModel)]= "newmedecin.datenaissance"name="datenaissance" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label >faculte</label>
+                <input type="string" [(ngModel)]= "newmedecin.faculte" name="faculte" class="form-control">
+        </div>
+        <div class="mt-2">
+            <button type="submit" (click)="addmedecin()"class="btn btn-success">Ajouter</button>
+        </div>
+        <div>
+            <h3>{{ message }}</h3>
+        </div>
+    </form>
+</div>
