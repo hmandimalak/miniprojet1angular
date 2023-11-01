@@ -19,15 +19,16 @@
             <label >Date naissance</label>
                 <input type="date" [(ngModel)]= "newmedecin.datenaissance"name="datenaissance" class="form-control">
         </div>
-        <div class="col-sm-2 col-md-2 col-lg-2">
-            <label >faculte</label>
-                <input type="string" [(ngModel)]= "newmedecin.faculte" name="faculte" class="form-control">
-        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>faculte</label>
+                <select class="form-control form-control-lg" id="idCat" name="idCat"[(ngModel)]="newIdfac">
+                    <option *ngFor="let fac of facultes" [value]="fac.idfac" >{{fac.nomfac}}
+                    </option>
+                </select>
+            </div>
         <div class="mt-2">
             <button type="submit" (click)="addmedecin()"class="btn btn-success">Ajouter</button>
         </div>
-        <div>
-            <h3>{{ message }}</h3>
-        </div>
+        
     </form>
 </div>
