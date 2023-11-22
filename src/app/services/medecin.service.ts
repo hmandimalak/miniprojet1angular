@@ -14,7 +14,9 @@ export class MedecinService {
   constructor() {
     this.facultes =[
       { idfac : 1, nomfac : "fms"},
-      { idfac : 2,nomfac :"fmt"}
+      { idfac : 2,nomfac :"fmt"},
+      { idfac : 3,nomfac:"fmm" },
+      { idfac : 4,nomfac :"fmdm"}
 
 
     ];

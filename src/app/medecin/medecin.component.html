@@ -12,8 +12,8 @@
                         <td>{{medecin.specialite}}</td>
                         <td>{{medecin.datenaissance | date:'dd/MM/yyyy'}}</td>
                         <td>{{medecin.faculte.nomfac}}</td>
-                        <td><a class="btn btn-danger" (click)="supprimermedecin(medecin)">Supprimer</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updatemedecin',medecin.idmedecin]">Modifier</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimermedecin(medecin)">Supprimer</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updatemedecin',medecin.idmedecin]">Modifier</a></td>
                         
                     </tr>
                 </tbody>
