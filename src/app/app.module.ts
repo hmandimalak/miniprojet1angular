@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { UpdateMedecinComponent } from './update-medecin/update-medecin.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { RechercheParFaculteComponent } from './recherche-par-faculte/recherche-par-faculte.component';
+import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     UpdateMedecinComponent,
     LoginComponent,
     ForbiddenComponent,
+    RechercheParFaculteComponent,
+    RechercheParNomComponent,
+    SearchFilterPipe,
 
   ],
   imports: [
