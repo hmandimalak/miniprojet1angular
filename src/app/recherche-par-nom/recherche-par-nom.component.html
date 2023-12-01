@@ -19,13 +19,13 @@
                                 <th>Date naissance</th>
                                 <th>faculte</th>
                             </tr>
-                            <tbody *ngFor="let medecin of medecin | searchFilter:searchTerm">
+                            <tbody *ngFor="let med of medecin | searchFilter:searchTerm">
                                 <tr>
-                                    <td>{{medecin.idmedecin}}</td>
-                                    <td>{{medecin.nommedecin}}</td>
-                                    <td>{{medecin.specialite}}</td>
-                                    <td>{{medecin.datenaissance | date:'dd/MM/yyyy'}}</td>
-                                    <td>{{medecin.faculte}}</td>
+                                    <td>{{med.idmedecin}}</td>
+                                    <td>{{med.nommedecin}}</td>
+                                    <td>{{med.specialite}}</td>
+                                    <td>{{med.datenaissance | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{med.faculte.nomfac}}</td>
                                 
                                 </tr>
                             </tbody>

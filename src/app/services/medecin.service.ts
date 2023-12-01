@@ -1,4 +1,4 @@
-import { medecin } from './../model/medecin.model';
+
 import { Injectable } from '@angular/core';
 import { medecin } from '../model/medecin.model';
 import { faculte } from '../model/faculte.model';
@@ -74,14 +74,14 @@ export class MedecinService {
   consulterfacultes(id: number): faculte {
     return this.facultes.find(fac => fac.idfac == id)!;
   }
-  rechercherParFaculte(idfac: number): medecin=[] {
+  rechercherParFaculte(idfac: number): medecin[] {
     console.log("Selected genre ID (Type):", typeof idfac);
 
     const filterevet = this.medecin.filter(med => {
       console.log("idfac", idfac);
-      console.log("slm", med.Type.idfac);
+      console.log("medecin", med.faculte.idfac);
       console.log("Concert with Genre:", med);
-      return med.Type.idfac == idfac;
+      return med.faculte.idfac == idfac;
     });
     console.log("Filtered Concerts:", filterevet);
 
@@ -92,12 +92,13 @@ export class MedecinService {
     return filterevet;
   }
   rechercherParNom(nommedecin: String): medecin[] {
-    const filterevet = this.med.filter(med => {
-      return med.nommedecin.toLowerCase().includes(nommedecin.toLowerCase());
+    const filterevet = this.medecin.filter(medecin=> {
+      return medecin.nommedecin.toLowerCase().includes(nommedecin.toLowerCase());
     });
     console.log("Filtered Concerts:", filterevet);
     return filterevet;
   }
+
 
 
 }
