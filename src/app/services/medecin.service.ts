@@ -1,59 +1,49 @@
 
 import { Injectable } from '@angular/core';
-import { medecin } from '../model/medecin.model';
-import { faculte } from '../model/faculte.model';
+import { Medecin } from '../model/medecin.model';
+import { Faculte } from '../model/faculte.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { FaculteWrapper } from '../model/faculte.Wrapped.model';
+
+const httpOptions = {
+  headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedecinService {
-  medecin: medecin[];
-  facultes: faculte[]
+  apiURLFAC: string = 'http://localhost:8100/medecins/fac';
+
+  apiURL: string = 'http://localhost:8100/medecins/api';
+  medecins: Medecin[] =[];
+  //facultes: faculte[]
 
 
-  constructor() {
-    this.facultes = [
-      { idfac: 1, nomfac: "fms" },
-      { idfac: 2, nomfac: "fmt" },
-      { idfac: 3, nomfac: "fmm" },
-      { idfac: 4, nomfac: "fmdm" }
-
-
-    ];
-    this.medecin = [
-      {
-        idmedecin: 1, nommedecin: "ahmed", specialite: "Cardiologue", datenaissance: new Date("01/14/1970"),
-        faculte: { idfac: 1, nomfac: "fms" }
-      },
-      {
-        idmedecin: 2, nommedecin: "najib", specialite: "Dermatologue", datenaissance: new Date("12/17/1980"),
-        faculte: { idfac: 2, nomfac: "fmt" }
-      },
-      {
-        idmedecin: 3, nommedecin: "selim", specialite: "Neurologue", datenaissance: new Date("02/20/1975"),
-        faculte: { idfac: 1, nomfac: "fms" }
-      }];
+  constructor(private http : HttpClient){
+  
+      
   }
-  listemedecin(): medecin[] {
-    return this.medecin;
+  listemedecin(): Observable<Medecin[]> {
+    return this.http.get<Medecin[]>(this.apiURL);
   }
-  ajoutermedecin(med: medecin) {
-    this.medecin.push(med);
+  ajoutermedecin(med: Medecin):Observable<Medecin> {
+    return this.http.post<Medecin>(this.apiURL, med, httpOptions);
   }
-  supprimermedecin(med: medecin) {
-    const index = this.medecin.indexOf(med, 0);
-    if (index > -1) {
-      this.medecin.splice(index, 1);
+  
+  supprimerMedecin(id : number) {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.delete(url, httpOptions);
     }
-  }
-
-  consultermedecin(id: Number): medecin {
-    return this.medecin.find(med => med.idmedecin == id)!;
-
-  }
+    
+    consulterMedecin(id: number): Observable<Medecin> {
+      const url = `${this.apiURL}/${id}`;
+      return this.http.get<Medecin>(url);
+      }
   triermedecin() {
-    this.medecin = this.medecin.sort((n1, n2) => {
+    this.medecins = this.medecins.sort((n1, n2) => {
       if (n1.idmedecin! > n2.idmedecin!) {
         return 1;
       }
@@ -63,21 +53,22 @@ export class MedecinService {
       return 0;
     });
   }
-  updatemedecin(med: medecin) {
-    this.supprimermedecin(med);
-    this.ajoutermedecin(med);
-    this.triermedecin();
+  updateMedecin(med :Medecin) : Observable<Medecin>
+  {
+      return this.http.put<Medecin>(this.apiURL, med, httpOptions);
   }
-  listefacultes(): faculte[] {
-    return this.facultes;
-  }
+  listeFacultes():Observable<FaculteWrapper>{
+    return this.http.get<FaculteWrapper>(this.apiURLFAC);
+    }
+
+ /*
   consulterfacultes(id: number): faculte {
     return this.facultes.find(fac => fac.idfac == id)!;
-  }
-  rechercherParFaculte(idfac: number): medecin[] {
+  } */
+/*   rechercherParFaculte(idfac: number): Medecin[] {
     console.log("Selected genre ID (Type):", typeof idfac);
 
-    const filterevet = this.medecin.filter(med => {
+    const filterevet = this.medecins.filter(med => {
       console.log("idfac", idfac);
       console.log("medecin", med.faculte.idfac);
       console.log("Concert with Genre:", med);
@@ -90,14 +81,20 @@ export class MedecinService {
     }
 
     return filterevet;
-  }
-  rechercherParNom(nommedecin: String): medecin[] {
-    const filterevet = this.medecin.filter(medecin=> {
-      return medecin.nommedecin.toLowerCase().includes(nommedecin.toLowerCase());
-    });
-    console.log("Filtered Concerts:", filterevet);
-    return filterevet;
-  }
+  } */
+    rechercherParFaculte(idfac: number):Observable< Medecin[]> {
+      const url = `${this.apiURL}/medsfac/${idfac}`;
+      return this.http.get<Medecin[]>(url);
+      }
+      
+    rechercherParNom(nommedecin: string):Observable< Medecin[]> {
+      const url = `${this.apiURL}/medsByName/${nommedecin}`;
+      return this.http.get<Medecin[]>(url);
+    }
+    ajouterFaculte( fac: Faculte):Observable<Faculte>{
+      return this.http.post<Faculte>(this.apiURLFAC, fac, httpOptions);
+      }
+      
 
 
 

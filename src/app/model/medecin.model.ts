@@ -1,10 +1,10 @@
-import { faculte } from "./faculte.model";
+import { Faculte } from "./faculte.model";
 
-export class medecin {
+export class Medecin {
     idmedecin! : number;
     nommedecin! : string;
     specialite! : string;
     datenaissance! : Date ;
-    faculte! : faculte;
+    faculte! : Faculte;
     }
     

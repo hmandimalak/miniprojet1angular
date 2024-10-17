@@ -1,6 +1,6 @@
-import { faculte } from './../model/faculte.model';
+import { Faculte } from '../model/faculte.model';
 import { Component } from '@angular/core';
-import { medecin } from '../model/medecin.model';
+import { Medecin } from '../model/medecin.model';
 import { MedecinService } from '../services/medecin.service';
 
 @Component({
@@ -9,20 +9,19 @@ import { MedecinService } from '../services/medecin.service';
   styleUrls: ['./recherche-par-Faculte.component.css']
 })
 export class RechercheParFaculteComponent {
-medecin:medecin[]=[];
+medecins:Medecin[]=[];
 idfac!:number;
-faculte:faculte[]=[];
+facultes:Faculte[]=[];
 ngOnInit(): void {
-  this.faculte = this.medecinService.listefacultes();
+  this.medecinService.listeFacultes().
+  subscribe(facs => {this.facultes = facs._embedded.facultes;
+  console.log(facs);
+  });
   }
+  
 constructor(private medecinService:MedecinService){}
 onChange() {
-  console.log('Selected Type ID:', this.idfac);
-
-  // Call the service to filter medecin based on the selected Type
-  this.medecin= this.medecinService.rechercherParFaculte(this.idfac);
-
-  // Debugging statement
-  console.log('Filtered medecin:', this.medecin);
-}
+  this.medecinService.rechercherParFaculte(this.idfac).
+  subscribe(meds =>{this.medecins=meds});
+  }
 }

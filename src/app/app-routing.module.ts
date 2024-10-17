@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MedecinComponent } from './medecin/medecin.component';
+import { MedecinComponent } from './medecins/medecins.component';
 import { AddMedecinComponent } from './add-medecin/add-medecin.component';
 import { UpdateMedecinComponent } from './update-medecin/update-medecin.component';
 import { LoginComponent } from './login/login.component';
@@ -8,17 +8,20 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { medecinGuard } from './medecin.guard';
 import { RechercheParFaculteComponent } from './recherche-par-faculte/recherche-par-faculte.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { ListeFacultesComponent } from './liste-facultes/liste-facultes.component';
 
 const routes: Routes = [
-  {path: "medecin", component : MedecinComponent},
+  {path: "medecins", component : MedecinComponent},
   {path: "add-medecin", component : AddMedecinComponent,canActivate:[medecinGuard]},
-  {path: "updatemedecin/:id", component: UpdateMedecinComponent},
+  {path: "updateMedecin/:id", component: UpdateMedecinComponent},
   {path: 'login', component: LoginComponent},
   {path: 'app-forbidden', component: ForbiddenComponent},
   {path: "rechercheParFaculte", component : RechercheParFaculteComponent},
   {path: "rechercheParNom", component : RechercheParNomComponent},
+  {path: "listeFacultes", component : ListeFacultesComponent},
 
-  {path: "", redirectTo: "medecin", pathMatch: "full" }
+
+  {path: "", redirectTo: "medecins", pathMatch: "full" }
   
   
 ];

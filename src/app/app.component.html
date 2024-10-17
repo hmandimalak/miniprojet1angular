@@ -2,7 +2,7 @@
 <html >
 <head>
 <meta charset="utf-8">
-<title>medecin</title>
+<title>Gestion des Medecins</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -11,22 +11,24 @@
 <!-- Links -->
 <ul class="navbar-nav">
 <li class="nav-item">
-<a class="nav-link" routerLink="/medecin" >Home</a>
+<a class="nav-link" routerLink="/medecins" >Home</a>
 </li>
 <!-- Dropdown -->
 <li class="nav-item dropdown">
 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-Medecin
+Medecins
 </a>
 <div class="dropdown-menu">
 <a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/add-medecin">Ajouter</a>
 <a class="dropdown-item" href="#">Lister</a>
 <a class="dropdown-item" routerLink="/rechercheParFaculte" >Recherche Par faculte</a>
 <a class="dropdown-item" routerLink="/rechercheParNom" >Recherche Par Nom</a>
+<a class="dropdown-item" routerLink="/listeFacultes" >Gestion des facultes</a>
+
 </div>
 </li>
 </ul>
-<ul class="navbar-nav ml-auto" >
+<ul class="navbar-nav ms-auto m-2" >
     <li> <a class="nav-link">{{authService.loggedUser}}</a></li>
 <li class="nav-item dropdown">
 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

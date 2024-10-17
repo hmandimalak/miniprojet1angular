@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { medecin } from '../model/medecin.model';
+import { Medecin } from '../model/medecin.model';
 import { MedecinService } from '../services/medecin.service';
 
 @Component({
@@ -8,19 +8,29 @@ import { MedecinService } from '../services/medecin.service';
   styleUrls: ['./recherche-par-nom.component.css']
 })
 export class RechercheParNomComponent {
-  medecin:medecin[]=[];
-  allmedecin:medecin[]=[];
-  nommedecin!:String;
-  searchTerm!:string;
+  medecins:Medecin[]=[];
+  allmedecin:Medecin[]=[];
+  nommedecin!:string;
+  searchTerm!:String;
   ngOnInit(): void {
-    this.medecin = this.MedecinService.listemedecin();
-    this.allmedecin=this.medecin;
+    this.MedecinService.listemedecin().subscribe(meds => {
+      console.log(meds);
+      this.allmedecin = meds;
+      });
     }
   constructor(private MedecinService:MedecinService){}
-  onChange() {
-    this.medecin = this.MedecinService.rechercherParNom(this.searchTerm);
-    console.log('Filtered medecin:', this.medecin);
+ /*  onKeyUp(filterText : string){
+    this.medecins = this.allmedecin.filter(item =>
+    item.nommedecin.toLowerCase().includes(filterText));
+    } */
+    
+
+
+  recherchermeds(){
+    this.MedecinService.rechercherParNom(this.nommedecin).
+      subscribe(meds => {
+      this.medecins = meds;
+      console.log(meds)});
   }
-  onKeyUp(filterText : string){ this.medecin = this.medecin.filter(item => item.nommedecin.toLowerCase().includes(filterText)); }
   
 }

@@ -1,4 +1,4 @@
-export class faculte{
+export class Faculte{
     idfac! : number; 
     nomfac! : string;
 }
