@@ -12,10 +12,11 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RechercheParFaculteComponent } from './recherche-par-faculte/recherche-par-faculte.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { SearchFilterPipe } from './search-filter.pipe';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { UpdateFaculteComponent } from './update-faculte/update-faculte.component';
 import { ListeFacultesComponent } from './liste-facultes/liste-facultes.component';
+import { TokenInterceptor } from './services/token.interceptor';
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { ListeFacultesComponent } from './liste-facultes/liste-facultes.componen
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide : HTTP_INTERCEPTORS,
+    useClass : TokenInterceptor,
+    multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
