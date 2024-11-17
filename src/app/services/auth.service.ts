@@ -22,10 +22,18 @@ token!:string;
 public loggedUser!:string;
 public isloggedIn: Boolean = false;
 public roles!:string[];
+public regitredUser : User = new User();
+
 
   constructor(private router : Router,
               private http : HttpClient
 ) { }
+  setRegistredUser(user : User){
+  this.regitredUser=user;
+  }
+  getRegistredUser(){
+  return this.regitredUser;
+  }
 
   login(user : User)
   {
@@ -101,6 +109,14 @@ public roles!:string[];
   {
     return  this.helper.isTokenExpired(this.token);   
   }
+  registerUser(user :User){
+    return this.http.post<User>(this.apiURL+'/register', user,
+    {observe:'response'});
+    }
+    validateEmail(code : string){
+      return this.http.get<User>(this.apiURL+'/verifyEmail/'+code);
+      }
+    
 
 
 

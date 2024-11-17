@@ -4,6 +4,7 @@ import { MedecinService } from '../services/medecin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Faculte } from '../model/faculte.model';
 import { Medecin } from '../model/medecin.model';
+import { Image } from '../model/image.model';
 
 @Component({
   selector: 'app-add-medecin',
@@ -14,6 +15,9 @@ export class AddMedecinComponent {
   facultes! : Faculte[];
   newIdfac! : number;
   newfaculte! :Faculte;
+  uploadedImage!: File;
+  imagePath: any;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private medecinService : MedecinService,
@@ -34,7 +38,7 @@ export class AddMedecinComponent {
     this.router.navigate(['medecins']);
 } */
 
-    addMedecin() {
+    /*addMedecin() {
       this.newMedecin.faculte = this.facultes.find(fac => fac.idfac == this.newIdfac)!;
       this.medecinService.ajoutermedecin(this.newMedecin)
         .subscribe(
@@ -46,6 +50,26 @@ export class AddMedecinComponent {
             console.error('Erreur lors de l\'ajout du médecin', error);
           }
         );
+    }*/
+    addMedecin(){
+          this.medecinService
+          .uploadImage(this.uploadedImage, this.uploadedImage.name)
+          .subscribe((img: Image) => {
+          this.newMedecin.image=img;
+          this.newMedecin.faculte = this.facultes.find(cat => cat.idfac
+          == this.newIdfac)!;
+          this.medecinService
+          .ajoutermedecin(this.newMedecin)
+          .subscribe(() => {
+          this.router.navigate(['medecins']);
+          });
+          });
     }
+    onImageUpload(event: any) {
+      this.uploadedImage = event.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(this.uploadedImage);
+      reader.onload = (_event) => { this.imagePath = reader.result; }
+      }
     
 }

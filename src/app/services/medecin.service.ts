@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { FaculteWrapper } from '../model/faculte.Wrapped.model';
+import { Image } from '../model/image.model';
 
 const httpOptions = {
   headers: new HttpHeaders( {'Content-Type': 'application/json'} )
@@ -114,6 +115,28 @@ export class MedecinService {
     ajouterFaculte( fac: Faculte):Observable<Faculte>{
       return this.http.post<Faculte>(this.apiURLFAC, fac, httpOptions);
       }
+    uploadImage(file: File, filename: string): Observable<Image>{
+        const imageFormData = new FormData();
+        imageFormData.append('image', file, filename);
+        const url = `${this.apiURL + '/image/upload'}`;
+        return this.http.post<Image>(url, imageFormData);
+    }
+    loadImage(id: number): Observable<Image> {
+        const url = `${this.apiURL + '/image/get/info'}/${id}`;
+        return this.http.get<Image>(url);
+    }
+    uploadImageMed(file: File, filename: string, idmedecin:number): Observable<any>{
+      const imageFormData = new FormData();
+      imageFormData.append('image', file, filename);
+      const url = `${this.apiURL + '/image/uplaodImageMed'}/${idmedecin}`;
+      return this.http.post(url, imageFormData);
+      }
+      supprimerImage(id : number) {
+        const url = `${this.apiURL}/image/delete/${id}`;
+        return this.http.delete(url, httpOptions);
+        }
+        
+        
       
 
 

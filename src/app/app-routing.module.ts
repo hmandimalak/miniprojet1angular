@@ -9,6 +9,8 @@ import { medecinGuard } from './medecin.guard';
 import { RechercheParFaculteComponent } from './recherche-par-faculte/recherche-par-faculte.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { ListeFacultesComponent } from './liste-facultes/liste-facultes.component';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 const routes: Routes = [
   {path: "medecins", component : MedecinComponent},
@@ -19,6 +21,9 @@ const routes: Routes = [
   {path: "rechercheParFaculte", component : RechercheParFaculteComponent},
   {path: "rechercheParNom", component : RechercheParNomComponent},
   {path: "listeFacultes", component : ListeFacultesComponent},
+  {path:'register',component:RegisterComponent},
+  { path: 'verifEmail', component: VerifEmailComponent },
+
 
 
   {path: "", redirectTo: "medecins", pathMatch: "full" }

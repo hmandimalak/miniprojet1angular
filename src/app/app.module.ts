@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MedecinComponent } from './medecins/medecins.component';
 import { AddMedecinComponent } from './add-medecin/add-medecin.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateMedecinComponent } from './update-medecin/update-medecin.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
@@ -13,10 +13,14 @@ import { RechercheParFaculteComponent } from './recherche-par-faculte/recherche-
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UpdateFaculteComponent } from './update-faculte/update-faculte.component';
 import { ListeFacultesComponent } from './liste-facultes/liste-facultes.component';
 import { TokenInterceptor } from './services/token.interceptor';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 
 @NgModule({
@@ -32,13 +36,19 @@ import { TokenInterceptor } from './services/token.interceptor';
     SearchFilterPipe,
     ListeFacultesComponent,
     UpdateFaculteComponent,
+    RegisterComponent,
+    VerifEmailComponent,
 
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(), 
+    
   ],
   providers: [{ provide : HTTP_INTERCEPTORS,
     useClass : TokenInterceptor,
